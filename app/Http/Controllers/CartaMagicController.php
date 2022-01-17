@@ -14,7 +14,7 @@ class CartaMagicController extends Controller
      */
     public function index()
     {
-        //
+        return response('Hola mundo');
     }
 
     /**
@@ -24,7 +24,8 @@ class CartaMagicController extends Controller
      */
     public function create()
     {
-        //
+        $data = 'valor pepe 123';
+        return view('carta_magic.create', ['data' => $data]);
     }
 
     /**

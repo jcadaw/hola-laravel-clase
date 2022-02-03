@@ -27,3 +27,4 @@ Route::get('/carta_magics', [CartaMagicController::class, 'index'])->name('carta
 Route::get('/carta_magics/create', [CartaMagicController::class, 'create'])->name('carta_magics.create');
 Route::post('/carta_magics', [CartaMagicController::class, 'store'])->name('carta_magics.store');
 Route::get('/carta_magics/{carta_magic}/edit', [CartaMagicController::class, 'edit'])->name('carta_magics.edit');
+Route::put('/carta_magics/{carta_magic}', [CartaMagicController::class, 'update'])->name('carta_magics.update');

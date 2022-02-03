@@ -46,6 +46,12 @@ class CartaMagicController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user();
+        $cartaMagic = auth()->user()->cartaMagics()->where('titulo', $request->titulo)->first();
+        if($cartaMagic){
+            return back()->withErrors(['titulo' => 'Ya tienes una carta con ese título']);
+        }
+
+
         $cartaMagic = $user->cartaMagics()->create([
             'titulo' => $request['titulo'],
             'tipo' => 'tierra',
@@ -73,7 +79,7 @@ class CartaMagicController extends Controller
      */
     public function edit(CartaMagic $cartaMagic)
     {
-        //
+        return view('carta_magics.edit', compact('cartaMagic'));
     }
 
     /**
@@ -85,7 +91,7 @@ class CartaMagicController extends Controller
      */
     public function update(Request $request, CartaMagic $cartaMagic)
     {
-        //
+        dd("hola");
     }
 
     /**

@@ -16,7 +16,7 @@ class CreateCartaMagicsTable extends Migration
         Schema::create('carta_magics', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('user_id');
+            $table->foreignId('user_id')->references('id')->on('users');
             $table->string('titulo');
             $table->string('tipo');
             $table->string('email_creador')->nullable();

@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\CartaMagic;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class CartaMagicController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +20,10 @@ class CartaMagicController extends Controller
      */
     public function index()
     {
-        return response('Hola mundo');
+        $cartaMagics = auth()->user()->cartaMagics;
+        return view('carta_magics.index', //compact('cartaMagics')
+                                          ['cartaMagics' => $cartaMagics] 
+        );
     }
 
     /**
@@ -25,7 +34,7 @@ class CartaMagicController extends Controller
     public function create()
     {
         $data = 'valor pepe 123';
-        return view('carta_magic.create', ['data' => $data]);
+        return view('carta_magics.create', ['paco' => $data]);
     }
 
     /**
@@ -36,7 +45,13 @@ class CartaMagicController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = auth()->user();
+        $cartaMagic = $user->cartaMagics()->create([
+            'titulo' => $request['titulo'],
+            'tipo' => 'tierra',
+        ]);
+
+        return response("Creada la carta con id ".$cartaMagic->id);
     }
 
     /**
